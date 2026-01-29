@@ -76,7 +76,7 @@
         const Instagram = (props) => <Icon name="Instagram" {...props} />;
         const Twitter = (props) => <Icon name="Twitter" {...props} />;
         const Linkedin = (props) => <Icon name="Linkedin" {...props} />;
-        const ExternalLink = (props) => <Icon name="ExternalLink" {...props} />; // 外部リンク用アイコン追加
+        const ExternalLink = (props) => <Icon name="ExternalLink" {...props} />;
 
         const App = () => {
             const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -143,7 +143,7 @@ ${data.message}
                     icon: <FlaskConical className="w-6 h-6" />,
                     description: 'クライアント様の理想を形にする、高品質な処方開発と製造。スキンケアからメイクアップまで、薬機法を遵守した安全で効果的な製品づくりをサポートします。',
                     features: ['小ロットから大ロットまで対応', 'オーガニック・ヴィーガン処方', '独自原料の配合提案'],
-                    image: './factory.jpg' // ここを変更しました
+                    image: './factory.jpg'
                 },
                 {
                     id: 'planning',
@@ -152,7 +152,7 @@ ${data.message}
                     icon: <Lightbulb className="w-6 h-6" />,
                     description: 'トレンド分析とターゲットインサイトに基づき、「売れる」コンセプトを設計。ブランドの物語を紡ぎ、パッケージデザインから販促物までトータルでプロデュースします。',
                     features: ['市場調査・トレンド分析', 'ブランドコンセプト設計', 'パッケージデザイン'],
-                    image: 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80&w=1000'
+                    image: './planning.jpg' // 画像パスを変更
                 },
                 {
                     id: 'sales',
@@ -161,7 +161,7 @@ ${data.message}
                     icon: <ShoppingBag className="w-6 h-6" />,
                     description: '自社ブランドの展開ノウハウを活かし、ECサイト構築から実店舗への卸入まで、最適なチャネル戦略を提案。国内外への販路拡大を支援します。',
                     features: ['ECサイト構築・運営代行', 'バラエティショップへの卸入', '越境EC支援'],
-                    image: 'https://images.unsplash.com/photo-1612817288484-969119519028?auto=format&fit=crop&q=80&w=1000'
+                    image: './sales.jpg' // 画像パスを変更
                 },
                 {
                     id: 'consulting',
@@ -338,6 +338,11 @@ ${data.message}
                                                         src={service.image} 
                                                         alt={service.title} 
                                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.src = 'https://images.unsplash.com/photo-1571781565036-d3f7527f6f14?auto=format&fit=crop&q=80&w=1000'; // エラー時のフォールバック画像
+                                                            console.error('画像の読み込みに失敗しました:', service.image);
+                                                        }}
                                                     />
                                                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                                                 </div>
@@ -422,7 +427,6 @@ ${data.message}
                                     </div>
                                 </div>
                                 <div className="relative">
-                                    {/* 修正: aspect比率クラスをやめ、高さを明示的に指定して画像の消失を防ぐ */}
                                     <div className="relative w-full h-[500px] rounded-2xl overflow-hidden bg-stone-800">
                                         <img 
                                             src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800" 
@@ -476,7 +480,6 @@ ${data.message}
                                             輸出入業務
                                         </dd>
                                     </div>
-                                    {/* 関連会社情報の追加 */}
                                     <div className="border-t border-gray-200 pt-4 md:col-span-2 mt-4">
                                         <dt class="text-xs text-gray-500 uppercase tracking-wider mb-3">Group Companies</dt>
                                         <dd class="font-medium text-gray-900 space-y-3">
